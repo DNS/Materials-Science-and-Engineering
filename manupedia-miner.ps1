@@ -37,10 +37,24 @@ for ($i=0; $i -lt $links.Count; $i++) {
 }
 
 
+gc .\Manupedia\3d-printing.html | 
+	%{ $_ -match '<img src="(.+?)"'; $Matches[1] }
+
+[Convert]::ToBase64String($binarydata)
+------------------------
 
 
 
-https://www.open.edu/openlearn/science-maths-technology/engineering-technology/
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
+  //8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+
+  
+
+<div class="openlearnng-blockcontent"> ..... <div class="clearfix spacebg">
+<div class="openlearnng-blockcontent" id="yui_3_18_1_1_1739805136734_20">  ..... <div class="clearfix spacebg">
+
+
+$(gc .\Manupedia\3d-printing.html -Raw) -match '(?ims)<div class="openlearnng-blockcontent".*?>(.+?)<div class="clearfix spacebg">'
 
 
 
