@@ -10,9 +10,6 @@ $a = iwr https://www.open.edu/openlearn/manupedia
 
 $b = iwr https://www.open.edu/openlearn/pluginfile.php/3277669/tool_ocwmanage/articletext/0/screen_shot_2018_800.png
 
-'<img src="(.+?)" alt="" />'
-
-
 https://www.open.edu/openlearn/manupedia?filter=date/grid/all/all/all/all/all/all/all&page=0
 https://www.open.edu/openlearn/manupedia?filter=date/grid/all/all/all/all/all/all/all&page=8
 
@@ -40,7 +37,15 @@ for ($i=0; $i -lt $links.Count; $i++) {
 gc .\Manupedia\3d-printing.html | 
 	%{ $_ -match '<img src="(.+?)"'; $Matches[1] }
 
-[Convert]::ToBase64String($binarydata)
+$img_link = 'https://www.listchallenges.com/f/items2022/19ad4981-f572-4a30-8a45-75d6f75f1a52.jpg'
+$a = iwr $img_link
+$m = $img_link -match '(?ims)\.(jpg|png|gif|webp)\Z'
+$file_ext = $Matches[1].ToLower()
+$b = [Convert]::ToBase64String($a.Content)
+"<img src=`"data:image/jpg;base64,$b`" alt=`"Red dot`" />" | out-file test.html
+
+
+
 ------------------------
 
 
